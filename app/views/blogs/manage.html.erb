@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to new_blog_path, class: 'btn btn-warning' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Blog
+  <% end %>
+  <h1>Listing Blogs</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @blogs) do |blog| %>
+        <td><%= blog.title %></td>
+        <td><%= blog.desc %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

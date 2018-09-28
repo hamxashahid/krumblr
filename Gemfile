@@ -42,6 +42,8 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'rspec-rails', '~> 3.7.2'
   gem 'shoulda-matchers', '~> 3.1.2'
+  gem 'rails-controller-testing'
+
 end
 
 group :development do
@@ -53,6 +55,14 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+gem 'jquery-rails'
+gem 'record_tag_helper', '~> 1.0'
+gem 'devise'
+gem 'bootstrap-generators', '~> 3.3.4'
+gem 'friendly_id', '~> 5.2.1'
+gem 'commontator', '~> 5.1.0'
+gem 'acts-as-taggable-on', '~> 6.0'
+gem 'selectize-rails'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
