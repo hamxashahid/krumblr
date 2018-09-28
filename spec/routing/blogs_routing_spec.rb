@@ -7,6 +7,18 @@ RSpec.describe BlogsController, type: :routing do
       expect(:get => "/blogs").to route_to("blogs#index")
     end
 
+    it "routes to #manage" do
+      expect(:get => "/blogs/manage").to route_to("blogs#manage")
+    end
+
+    it "routes to #posts" do
+      expect(:get => "/blogs/1/posts").to route_to("blogs#posts", id: "1")
+    end
+
+    it "routes to #post_details" do
+      expect(:get => "/blogs/1/post_details/1").to route_to("blogs#post_details", id: "1", post_id: '1')
+    end
+
     it "routes to #new" do
       expect(:get => "/blogs/new").to route_to("blogs#new")
     end
