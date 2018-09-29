@@ -13,6 +13,7 @@
         <th>Blog</th>
         <th>Title</th>
         <th>Body</th>
+        <th>Tags</th>
         <th>Published</th>
         <th></th>
         <th></th>
@@ -25,6 +26,7 @@
         <td><%= post.blog.title %></td>
         <td><%= post.title %></td>
         <td><%= post.body %></td>
+        <td><%= post.tag_list %></td>
         <td><%= post.published %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>

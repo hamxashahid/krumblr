@@ -1,8 +1,15 @@
 <div class="page-header">
   <h1><%= @post.title %></h1>
 </div>
-<p><%= @post.body %></p>
-<div>
+<div class="page-header">
+  <p><%= @post.body %></p>
+</div>
+<div class="page-header">
+  <h3>Tags</h3>
+  <%= @post.tag_list %>
+</div>
+<div class="page-header">
   <%= commontator_thread(@post) %>
 </div>
+
 

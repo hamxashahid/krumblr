@@ -9,7 +9,11 @@ class BlogsController < ApplicationController
   end
 
   def posts
-    @posts = @blog.posts.where(published: true)
+    if params[:q_post].present?
+      @posts = post_search(@blog, params[:q_post])
+    else
+      @posts = @blog.posts.published
+    end
   end
 
   def post_details
@@ -77,6 +81,10 @@ class BlogsController < ApplicationController
   end
 
   private
+    # Search posts by title, body and tags
+    def post_search(blog, term)
+      (blog.posts.published.contains_text(term).tagged_with(term) + blog.posts.published.tagged_with(term)).uniq
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
       @blog = Blog.friendly.find(params[:id])

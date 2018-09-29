@@ -15,6 +15,10 @@ RSpec.describe BlogsController, type: :routing do
       expect(:get => "/blogs/1/posts").to route_to("blogs#posts", id: "1")
     end
 
+    it 'routes to #posts with search parameter' do
+      expect(get: '/blogs/1/posts?q_post=hello').to route_to('blogs#posts', id: '1', q_post: 'hello')
+    end
+
     it "routes to #post_details" do
       expect(:get => "/blogs/1/post_details/1").to route_to("blogs#post_details", id: "1", post_id: '1')
     end
