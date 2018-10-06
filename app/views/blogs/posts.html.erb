@@ -1,0 +1,21 @@
+<% if @posts.present? %>
+    <div class="page-header">
+      <div class="row">
+        <%= form_tag(posts_blog_path(id: @blog), method: :get) do %>
+          <%= text_field_tag :q_post, params[:q_post], placeholder: 'enter tag or text to search posts', class: 'form-control' %><br>
+          <%= submit_tag 'Search', class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+  <% @posts.each do |post| %>
+      <div class="page-header">
+        <div class="row">
+          <h1><%= link_to post.title, post_details_blog_path(id: @blog, post_id: post) %></h1>
+          <p>by <b><%= post.user.email %></b> at <%= post.created_at.to_s(:long) %></p>
+        </div>
+      </div>
+  <% end %>
+<% else %>
+    <h3>No posts available</h3>
+<% end %>
+

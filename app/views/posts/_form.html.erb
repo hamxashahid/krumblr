@@ -1,0 +1,53 @@
+<%= form_for(@post, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @post.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h4>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <%= f.label :blog, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :blog_id, @blogs, :id, :title, {include_blank: 'Please select a blog'}, required: true, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :title, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :title, class: "form-control", required: true  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :body, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :body, class: "form-control", rows: "30" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :published, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.check_box :published, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :tags, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select(:tag_list, universal_tag_list.map{|tag| [tag.to_s, tag.to_s]},{ :prompt => "Please select tags"},
+                   { :multiple => true, :size => 5, class: "selectize" }
+          ) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-warning" %>
+    </div>
+  </div>
+<% end %>

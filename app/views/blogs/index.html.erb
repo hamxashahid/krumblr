@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h3>Select a blog to view posts</h3>
+</div>
+
+<div class="container">
+  <% @blogs.each do |blog| %>
+      <div class="page-header">
+        <div class="row">
+          <h1><%= link_to blog.title, posts_blog_path(blog) %></h1>
+          <p><%= blog.desc %></p>
+        </div>
+      </div>
+  <% end %>
+</div>

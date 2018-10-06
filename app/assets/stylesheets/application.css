@@ -12,4 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require commontator/application
+ *= require selectize
+ *= require selectize.default
  */
