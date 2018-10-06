@@ -34,6 +34,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
+        fetch_blogs
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -49,6 +50,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
+        fetch_blogs
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -68,11 +70,11 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.friendly.find(params[:id])
+      @post = Post.by_user(current_user.id).by_friendly_id(params[:id])
     end
 
     def fetch_blogs
-      @blogs = Blog.where(user_id: current_user.id).order(:title)
+      @blogs = Blog.by_user(current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

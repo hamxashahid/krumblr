@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy, :posts]
+  before_action :set_user_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:posts]
   before_action :authenticate_user!, except: [:index, :posts, :post_details]
 
   # GET /blogs
@@ -83,11 +84,15 @@ class BlogsController < ApplicationController
   private
     # Search posts by title, body and tags
     def post_search(blog, term)
-      (blog.posts.published.contains_text(term).tagged_with(term) + blog.posts.published.tagged_with(term)).uniq
+      blog.posts.search(term, blog.id)
     end
     # Use callbacks to share common setup or constraints between actions.
+    def set_user_blog
+      @blog = Blog.by_user(current_user.id).by_friendly_id(params[:id])
+    end
+
     def set_blog
-      @blog = Blog.friendly.find(params[:id])
+      @blog = Blog.by_friendly_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
